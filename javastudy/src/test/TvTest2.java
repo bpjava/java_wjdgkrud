@@ -14,7 +14,7 @@ public class TvTest2 {
 		
 	MyMath nm = new MyMath();
 	
-	long value = nm.add(1L, 2L);
+	long value = nm.add(1L, 4L);
 
 	}
 
