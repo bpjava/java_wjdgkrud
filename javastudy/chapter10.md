@@ -20,10 +20,10 @@
     - Calendar->Date, Date->Calendar 로 변환할 일이 생기기도 함.
 
 
-    > 1. Calendar->Date
+    > 1. Calendar->Date:<br>
     >    Calendar cal = Calendar.getInstance();
     >    Date d = new Date(cal.getTimeInMillis());
-    > 2. Date->Calendar
+    > 2. Date->Calendar:<br>
     >    Date d = new Date;
     >    Calendar cal = Calendar.getInstance();
     >    cal.setTime(d);
@@ -39,7 +39,7 @@
 
 ## 형식화 클래스
 
-- ***형식화에 사용될 패턴을 정의***:데이터를 정의된 패턴에 맞춰         형식화할 수 있을 뿐만 아니라 역으로 형식화된 데이터에서 원래의        데이터를 얻어낼 수도 있다.
+- ***형식화에 사용될 패턴을 정의***: 데이터를 정의된 패턴에 맞춰         형식화할 수 있을 뿐만 아니라 역으로 형식화된 데이터에서 원래의        데이터를 얻어낼 수도 있다.
 
 1. DeciamlFormat
 
