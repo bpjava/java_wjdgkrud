@@ -8,7 +8,7 @@
     - Calendar을 상속받아 완전히 구현한 클래스:
         - GregorianCalendar(태국 외의 국가)
         - BuddhistCalendar(태국)
-
+    <br>
 
     > Calendar cal = new Calendar();    //에러! 추상클래스이기 때문에 인스턴스를 생성할 수 없음
     > Calendar cal = CAlendar.getInstance();    //getInstance()메서드는 Calendar 클래스를 구현한 클래스의 인스턴스를 반환
@@ -18,13 +18,13 @@
 
     - Calendar클래스가 추가되면서 Date는 잘 사용되지 않음.
     - Calendar->Date, Date->Calendar 로 변환할 일이 생기기도 함.
-
+    <br>
 
     > 1. Calendar->Date:<br>
-    >    Calendar cal = Calendar.getInstance();
+    >    Calendar cal = Calendar.getInstance();<br>
     >    Date d = new Date(cal.getTimeInMillis());
     > 2. Date->Calendar:<br>
-    >    Date d = new Date;
+    >    Date d = new Date;<br>
     >    Calendar cal = Calendar.getInstance();
     >    cal.setTime(d);
 
@@ -48,8 +48,8 @@
     - 텍스트 데이터 -> 숫자 데이터
     - 자주 사용되는 패턴(표 10-1(page24 참고))
     - 사용방법(예제10-10(page25))
-    > double number = 1234567.89
-    > Decimal Format df = new DecimalFOrmat("#.#E0");
+    > double number = 1234567.89<br>
+    > Decimal Format df = new DecimalFOrmat("#.#E0");<br>
     > String result = df.format(number);
 
     *parse(String)메서드: 기호나 문자가 포함된 문자열을 숫자로 쉽게 변환 
