@@ -13,7 +13,7 @@
     > Calendar cal = new Calendar();    //에러! 추상클래스이기 때문에 인스턴스를 생성할 수 없음
     > Calendar cal = CAlendar.getInstance();    //getInstance()메서드는 Calendar 클래스를 구현한 클래스의 인스턴스를 반환
 
-<br>
+
 2. Date와 Calendar
 
     - Calendar클래스가 추가되면서 Date는 잘 사용되지 않음.
