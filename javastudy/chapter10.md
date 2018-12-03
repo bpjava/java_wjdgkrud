@@ -13,7 +13,7 @@
     > Calendar cal = new Calendar();    //에러! 추상클래스이기 때문에 인스턴스를 생성할 수 없음
     > Calendar cal = CAlendar.getInstance();    //getInstance()메서드는 Calendar 클래스를 구현한 클래스의 인스턴스를 반환
 
-
+<br>
 2. Date와 Calendar
 
     - Calendar클래스가 추가되면서 Date는 잘 사용되지 않음.
@@ -47,7 +47,7 @@
     - 숫자 데이터 -> 정수, 부동소수점, 금액 등 다양한 형식
     - 텍스트 데이터 -> 숫자 데이터
     - 자주 사용되는 패턴(표 10-1(page24 참고))
-    - 사용방법(예제10-10(page25))
+    - 사용방법(예제10-10(page25))<br>
     > double number = 1234567.89<br>
     > Decimal Format df = new DecimalFOrmat("#.#E0");<br>
     > String result = df.format(number);
