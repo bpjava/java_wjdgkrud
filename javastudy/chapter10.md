@@ -114,7 +114,9 @@
 - 날짜와 시간을 별도의 클래스로 분리
 - 기본 클래스
     > 시간을 표현할 때: LocalTime클래스
+    >
     > 날짜를 표현할 때: LocalDateTime클래스
+    >
     > 날짜와 시간이 모두 필요할 때: LocalDateTime클래스
     > 날짜와 시간과 시간대: ZonedDateTime클래스
     > 날짜 사이의 간격: Period클래스
