@@ -114,7 +114,9 @@
 - 날짜와 시간을 별도의 클래스로 분리
 - 기본 클래스
     > 시간을 표현할 때: LocalTime클래스
+    >
     > 날짜를 표현할 때: LocalDateTime클래스
+    >
     > 날짜와 시간이 모두 필요할 때: LocalDateTime클래스
     > 날짜와 시간과 시간대: ZonedDateTime클래스
     > 날짜 사이의 간격: Period클래스
@@ -162,18 +164,18 @@
     | 클래스 | 메서드 | 설명 |
     | :--------: | :--------: | :--------: |
     | LocalDate | int getYear() | 년도(2018) |
-    |  | int getMonthValue() | 월(12) |
-    |  | Month getMonth() | 월(DECEMBER) |
-    |  | int getDayOfMonth() | 일(31) |
-    |  | int getDayOfYear() | 같은 해의 1월 1일부터 몇번쨰 일(365) |
-    |  | DayOfWeek getDayOfWeek() | 요일(FRIDAY) |
-    |  | int lengthOfMonth() | 같은 달의 총 일수(31) |
-    |  | int lengthOfYear() | 같은 해의 총 일수(365), 윤년이면 366 |
-    |  | booelan isLeapYear() | 윤년여부 확인(false) |
+    || int getMonthValue() | 월(12) |
+    || Month getMonth() | 월(DECEMBER) |
+    || int getDayOfMonth() | 일(31) |
+    || int getDayOfYear() | 같은 해의 1월 1일부터 몇번쨰 일(365) |
+    || DayOfWeek getDayOfWeek() | 요일(FRIDAY) |
+    || int lengthOfMonth() | 같은 달의 총 일수(31) |
+    || int lengthOfYear() | 같은 해의 총 일수(365), 윤년이면 366 |
+    || booelan isLeapYear() | 윤년여부 확인(false) |
     | LocalTime | int getHour() | 시(23) |
-    |  | int getMinute() | 분(59) |
-    |  | int getSecond() | 초(59) |
-    |  | int getNAno() | 나노초(0) |
+    || int getMinute() | 분(59) |
+    || int getSecond() | 초(59) |
+    || int getNAno() | 나노초(0) |
 
     - with(), plus(), minus(): 필드값 변경하기
         - 사용방법
