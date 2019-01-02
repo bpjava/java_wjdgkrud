@@ -245,3 +245,112 @@
     static메서드가 아님.
 
     예제13-19,20(page.244)
+
+<br>
+
+## 쓰레드의 동기화
+
+1. 개념
+
+    (1) 잠금, 임계영역 : 한 쓰레드가 특정 작업을 끝마치기 전까지 다른 쓰레드에 의해 방해받지 않도록 하는 것
+
+    (2) 동기화 : 한 쓰레드가 진행 중인 작업을 다른 쓰레드가 간섭하지 못하도록 막는 것
+
+2. synchronized를 이용한 동기화
+
+    - 임계영역 설정
+    <br><br>
+    > 1. 메서드 전체를 임계 영역으로 지정<br>
+    public synchronized void calcSum(){}
+    > 2. 특정한 영역을 임계 영역으로 지정
+    synchronized(객체의 참조변수){ } // 참조변수는 락을 걸고자하는 객체를 참조하는 것이여야 함.
+
+
+    예제13-22(page.251)
+
+3. wait()과 notify()
+
+    : wait() = 동기화된 임계 영역의 코드를 수행하다가 작업을 더 이상 진행할 상황이 아닐때 호출<br>
+    : notify() = 나중에 작업을 진행할 수 있는 상황이되면 호출<br>
+
+    *** lock를 얻을 수 있는 것은 하나의 쓰레드
+
+
+    예제13-25(page.253) - ??
+
+    - 기아현상: 게속해서 notify()를 받지 못하고 오랫동안 기다리는 현상. 이런 경우, notify()가 아니라 notifyAll()을 사용해야 함.
+    - 경쟁상태: 여러 쓰레드가 lock을 얻기 위해 서로 경쟁하는 것. notifyAll()을 사용할때 발생.
+
+4. Lock과 Condition을 이용한 동기화
+
+    : Lock 클래스 = 같은 메서드 내에서만 lock을 걸 수 있다는 제약이 불편할 때 사용
+
+    lock클래스의 종류
+    > ReetrantLock//재진입이 가능한 lock, 가장 일반적인 베타 lock<br>
+    > ReetrantLockReadWriteLock //읽기에는 공유적이고, 쓰기에는 배타적인 lock<br>
+    > StampedLock ReetrantLockReadWriteLock에 //낙관적인 lock의 기능 추가
+
+    (1) ReetrantLock
+
+    - 생성자 : ReetrantLock(), ReetrantLock(boolean fair)
+    // 생성자의 매개변수를 true로 주면 lock이 풀렸을 때 가장 오래 기다린 쓰레드가 lock을 획득.
+
+    - 메서드 : void lock(), void unlock(), boolean isLocked()
+
+        *** 자동적으로 lock의 잠금과 해제가 관리되는 synchronized 블럭과 달리, ReetrantLock과 같은 lock클래스들은 수동으로 lock을 잠그고 해제해야 함.
+
+    - try-finally문 사용 : 임계 영역 내에서 예외가 발생하거나 return문으로 빠져나가게 되면 lock이 풀리지 않을 수도 있기 때문.
+
+    - ReetrantLock과 Condition<br>
+    : Condition: 쓰레드를 구분해서 통지. 각각의 waiting pool에서 따로 기다리도록 함.
+
+        사용방법
+        > private ReetrantLock lock = new ReetrantLock(); //lock 생성
+        > <br>private Condition forCook = lock.newCondition(); //lock으로 condition 생성
+        > <br>private Condition forCust = lock.newCondition();
+
+        예제13-26(page.263)
+
+<br>
+
+## volatile
+
+: 멀티 코어일경우, 도중에 메모리에 저장된 변수의 값이 변경되었는데도 캐시에 저장된 값이 갱신되지 않아서 메모리에 저장된 값이 다른 경우가 발생. 앞에 volatile을 붙이면, 코어가 변수의 값을 읽어올 때 캐시가 아닌 메모리에서 읽어오게 됨.
+
+> volatile boolean suspend = false;<br>
+> volatile boolean stopped = false;<br>
+> public synchronized void stop(){
+>    stopped = true;} //synchronize 블럭으로 감싸도 가능 
+
+(1) volatile로 long과 double 원자화
+:<br>자바는 4바이트 단위로 데이터 처리. 8바이트인 long과 double타입의 변수는 변수의 값을 읽는 와중에 다른 쓰레드가 끼어들 여지가 있음.
+
+> volatile long rrr;<br>
+> volatile double fff;<br>
+//이렇게 원자화하여 사용.
+
+*** volatile은 원자화할 뿐, synchronized블럭 대신하여 동기화할 수 없음.
+
+<br>
+
+## fork & join 프레임웍
+
+: 하나의 작업을 작은 단위로 나눠 여러 쓰레드가 동시에 처리하는 것을 쉽게 만들어줌.
+
+> RecursiveAction //반환값이 없는 작업을 구현할 때
+> <br>RecursiveTast //반환값이 있는 작업을 구현할 때
+> <br>//두 클래스 모두 compute()라는 추상메서드를 가지고 있음. 상속을 통해 추상메서드 구현.
+
+> ForkJoinPool pool = new ForkJoinPool(); //쓰레드 풀을 생성<br>
+> SumTask task = new SumTask(from, to);//수행할 작업 생성<br>
+> Long result = pool.invoke(task); //작업 시작
+
+- 다른 쓰레드의 작업 훔쳐오기<br>
+자신의 작업 큐가 비어있는 쓰레드는 다른 쓰레드의 작업 큐에서 작업을 가져와 수행.
+(참고 page.271)
+
+- fork()와 join()<br>
+: fork() = 작업을 쓰레드의 작업 큐에 넣고, 작업 큐에 들어간 작업은 더 이상 나눌 수 없을 때까지 나눔. 비동기 메서드<br>
+    join() = 작업결과 호출. 동기 메서드
+
+예제13-27(page.272)
